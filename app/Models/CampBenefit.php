@@ -9,7 +9,7 @@ class CampBenefit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['camp_id', 'name'];
 
     public function camps() {
         return $this->belongsTo(Camp::class);
