@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Checkout;
+namespace App\Http\Controllers\OAuth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 
-class SuccessCheckoutController extends Controller
+class RedirectOAuthController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke(Request $request)
     {
-        return view('pages.checkout.success');
+        return Socialite::driver('google')->redirect();
     }
 }

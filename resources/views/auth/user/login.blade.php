@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <title>Laracamp by BuildWith Angga</title>
+    @vite('resources/js/app.js')
 </head>
 
 <body>
@@ -32,7 +33,7 @@
                 Because tomorrow become never
             </p>
             <p>
-                <a class="btn btn-border btn-google-login" href="#">
+                <a class="btn btn-border btn-google-login" href="{{ route('oauth.redirect') }}">
                     <img src="{{ asset('images/ic_google.svg') }}" class="icon" alt=""> Sign In with Google
                 </a>
             </p>

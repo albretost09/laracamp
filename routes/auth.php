@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\OAuth;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -17,10 +18,15 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', function() {
-        return view('auth.laracamp-login');
-    })
+    // User Login
+    Route::get('login', OAuth\OAuthController::class)
                 ->name('login');
+
+    Route::get('sign-in-google', OAuth\RedirectOAuthController::class)
+                ->name('oauth.redirect');
+
+    Route::get('auth/google/callback', OAuth\HandleOAuthController::class)
+                ->name('oauth.handle');
 
     Route::get('admin/login', [AuthenticatedSessionController::class, 'create'])
                 ->name('admin.login');

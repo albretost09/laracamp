@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Home;
+namespace App\Http\Controllers\User\Checkout;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class SuccessCheckoutController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke(Request $request)
     {
-        return view('home');
+        return view('pages.user.checkout.success');
     }
 }
