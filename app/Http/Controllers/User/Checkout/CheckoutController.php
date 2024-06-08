@@ -25,6 +25,10 @@ class CheckoutController extends Controller
      */
     public function create(Camp $camp)
     {
+        if ($camp->isRegistered) {
+            return to_route('dashboard')->with('error', "You already registered on {$camp->title} camp.");
+        }
+
         $camp = Camp::query()
             ->where('slug', $camp->slug)
             ->firstOrFail();

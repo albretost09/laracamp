@@ -12,7 +12,15 @@ class Camp extends Model
 
     protected $fillable = ['title', 'price'];
 
+    // create attributes isRegistered
+    public function getIsRegisteredAttribute() {
+        return $this->checkouts()->whereUserId(auth()->id())->exists();
+    }
+
     public function campBenefits() {
         return $this->hasMany(CampBenefit::class);
+    }
+    public function checkouts() {
+        return $this->hasMany(Checkout::class);
     }
 }

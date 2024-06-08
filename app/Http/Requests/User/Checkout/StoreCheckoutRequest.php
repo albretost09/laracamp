@@ -11,7 +11,7 @@ class StoreCheckoutRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -21,9 +21,14 @@ class StoreCheckoutRequest extends FormRequest
      */
     public function rules(): array
     {
+        $expired = now()->format('Y-m');
+
         return [
-            'card_number' => 'required|numeric|digits_between:16,20',
-            'expired' => 'required|date_format:Y-m',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . auth()->id() . ',id',
+            'occupation' => 'required|string',
+            'card_number' => 'required|numeric|digits_between:8,16',
+            'expired' => 'required|date_format:Y-m|after_or_equal:' . $expired,
             'cvc' => 'required|numeric|digits:3',
         ];
     }
